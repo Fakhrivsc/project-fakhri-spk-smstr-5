@@ -1,0 +1,22 @@
+{
+  "name": "spk-daging-sapi-saw",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "postinstall": "node -e \"const fs=require('fs'); if(fs.existsSync('node_modules/@rollup/wasm-node/dist')){ fs.copyFileSync('node_modules/@rollup/wasm-node/dist/native.js', 'node_modules/rollup/dist/native.js'); fs.cpSync('node_modules/@rollup/wasm-node/dist/wasm-node', 'node_modules/rollup/dist/wasm-node', {recursive:true}); }\""
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "lucide-react": "^0.475.0"
+  },
+  "devDependencies": {
+    "@rollup/wasm-node": "^4.34.8",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.1.0"
+  }
+}

@@ -1,0 +1,82 @@
+:root {
+  /* Palet Warna Sesuai UI-GUIDELINE.md */
+  --color-primary-red: #E54852;
+  --color-primary-red-hover: #D13842;
+  --color-soft-red: #FCE8E9;
+  --color-soft-red-hover: #F8D2D4;
+  --color-charcoal: #151619;
+  --color-charcoal-light: #22242A;
+  --color-white: #FFFFFF;
+  --color-page-gray: #F5F6F8;
+  --color-card-bg: #FFFFFF;
+  --color-text-primary: #202127;
+  --color-text-secondary: #666B75;
+  --color-text-muted: #8F95A0;
+  --color-border: #E1E4E8;
+  --color-border-hover: #CBD0D7;
+  
+  /* Status Colors */
+  --color-success: #168A5B;
+  --color-success-bg: #E7F6EE;
+  --color-warning: #D98A16;
+  --color-warning-bg: #FEF6E7;
+  --color-error: #C93440;
+  --color-error-bg: #FDECEE;
+
+  /* Typography */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-md: 18px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 28px;
+  --font-size-3xl: 32px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.625;
+
+  /* Spacing Grid (4/8 px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Dimensions */
+  --sidebar-width: 248px;
+  --sidebar-collapsed-width: 72px;
+  --header-height: 64px;
+  --max-content-width: 1440px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-button: 8px;
+  --radius-input: 8px;
+  --radius-card: 14px;
+  --radius-modal: 16px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(21, 22, 25, 0.05);
+  --shadow-sm: 0 2px 4px rgba(21, 22, 25, 0.06);
+  --shadow-md: 0 4px 12px rgba(21, 22, 25, 0.08);
+  --shadow-lg: 0 8px 24px rgba(21, 22, 25, 0.12);
+  --shadow-modal: 0 16px 40px rgba(21, 22, 25, 0.20);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
