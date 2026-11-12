@@ -1,0 +1,318 @@
+/* ==========================================================================
+   LANDING PAGE PROFESSIONAL REDESIGN STYLES
+   ========================================================================== */
+
+/* Hero Section */
+.hero-redesign {
+  position: relative;
+  background-color: var(--color-charcoal);
+  color: var(--color-white);
+  padding: 88px 0 72px 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.9);
+  transform: scale(1.02);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(21, 22, 25, 0.96) 0%,
+    rgba(21, 22, 25, 0.86) 42%,
+    rgba(21, 22, 25, 0.72) 75%,
+    rgba(176, 42, 53, 0.48) 100%
+  );
+  backdrop-filter: blur(2px);
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  align-items: center;
+  gap: 48px;
+}
+
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .hero-content {
+    align-items: center;
+  }
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(229, 72, 82, 0.16);
+  border: 1px solid rgba(229, 72, 82, 0.4);
+  color: #FFA4A9;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  width: fit-content;
+}
+
+.hero-title {
+  font-size: clamp(34px, 4.4vw, 52px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .highlight-red {
+  color: var(--color-primary-red);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-desc {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.65;
+  color: #D1D5DB;
+  max-width: 620px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+@media (max-width: 992px) {
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
+.hero-trust-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 13px;
+  color: #9CA3AF;
+}
+
+@media (max-width: 992px) {
+  .hero-trust-bar {
+    justify-content: center;
+  }
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #E5E7EB;
+}
+
+/* Floating Showcase Card di Hero */
+.hero-showcase-card {
+  background: rgba(28, 30, 36, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.hero-showcase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 30px;
+  right: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary-red), transparent);
+}
+
+/* Section Shared Headers */
+.section-header-centered {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary-red);
+  background-color: var(--color-soft-red);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.section-heading {
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.25;
+}
+
+.section-subheading {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Modern Card Hover Effects */
+.card-hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(21, 22, 25, 0.1);
+  border-color: #D1D5DB;
+}
+
+.card-hover-lift:hover .safe-image-element {
+  transform: scale(1.04);
+}
+
+/* Workflow Step Card */
+.workflow-step-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.workflow-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(21, 22, 25, 0.08);
+  border-color: #D8DCDE;
+}
+
+.step-number-watermark {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 38px;
+  font-weight: 800;
+  color: #ECEEF2;
+  font-family: monospace;
+  line-height: 1;
+}
+
+.step-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background-color: var(--color-soft-red);
+  color: var(--color-primary-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Criteria Card */
+.criteria-card-item {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 3px solid var(--color-primary-red);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.criteria-card-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(21, 22, 25, 0.07);
+}
+
+/* Call to Action Box */
+.cta-banner-wrapper {
+  background: linear-gradient(135deg, #151619 0%, #2D1418 55%, #151619 100%);
+  border: 1px solid rgba(229, 72, 82, 0.35);
+  border-radius: 24px;
+  padding: 64px 36px;
+  color: #FFFFFF;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.cta-banner-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229, 72, 82, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-banner-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229, 72, 82, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+

@@ -1,8 +1,12 @@
-import React from 'react';
-import { UtensilsCrossed, ShieldAlert, BookOpen, Clock, LogIn, ChefHat } from 'lucide-react';
+import React, { useState } from 'react';
+import { UtensilsCrossed, ShieldAlert, BookOpen, Clock, LogIn, ChefHat, LayoutDashboard, Menu, X } from 'lucide-react';
 import Button from '../components/ui/Button';
+import { storageAdapter } from '../services/storageAdapter';
 
 export default function PublicLayout({ currentPath, onNavigate, children }) {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const auth = storageAdapter.getAuth();
+
   const navItems = [
     { id: 'home', label: 'Beranda', path: '#/' },
     { id: 'recipes', label: 'Pilih Masakan', path: '#/recipes' },
@@ -10,15 +14,28 @@ export default function PublicLayout({ currentPath, onNavigate, children }) {
     { id: 'history', label: 'Riwayat', path: '#/history' },
   ];
 
+  const handleNavClick = (path) => {
+    onNavigate(path);
+    setMobileNavOpen(false);
+  };
+
   return (
     <div className="public-layout">
       {/* Top Navbar */}
       <header className="public-navbar">
         <div className="container public-navbar-container">
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <button
+              className="public-mobile-menu-btn"
+              onClick={() => setMobileNavOpen(!mobileNavOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileNavOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+
             <a
               href="#/"
-              onClick={(e) => { e.preventDefault(); onNavigate('#/'); }}
+              onClick={(e) => { e.preventDefault(); handleNavClick('#/'); }}
               className="brand-logo"
             >
               <div className="brand-icon">
@@ -37,7 +54,7 @@ export default function PublicLayout({ currentPath, onNavigate, children }) {
                     href={item.path}
                     onClick={(e) => {
                       e.preventDefault();
-                      onNavigate(item.path);
+                      handleNavClick(item.path);
                     }}
                     className={`nav-link ${currentPath === item.path ? 'active' : ''}`}
                   >
@@ -49,16 +66,69 @@ export default function PublicLayout({ currentPath, onNavigate, children }) {
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Button
-              variant="secondary"
-              size="sm"
-              iconLeft={LogIn}
-              onClick={() => onNavigate('#/admin/login')}
-            >
-              Login Admin
-            </Button>
+            {auth.isAuthenticated ? (
+              <Button
+                variant="primary"
+                size="sm"
+                iconLeft={LayoutDashboard}
+                onClick={() => handleNavClick('#/admin/dashboard')}
+              >
+                Panel Admin
+              </Button>
+            ) : (
+              <Button
+                variant="secondary"
+                size="sm"
+                iconLeft={LogIn}
+                onClick={() => handleNavClick('#/admin/login')}
+              >
+                Login Admin
+              </Button>
+            )}
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileNavOpen && (
+          <div className="public-mobile-drawer">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={item.path}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.path);
+                }}
+                className={`nav-link ${currentPath === item.path ? 'active' : ''}`}
+              >
+                {item.label}
+              </a>
+            ))}
+            <div style={{ paddingTop: '8px', borderTop: '1px solid var(--color-border)' }}>
+              {auth.isAuthenticated ? (
+                <Button
+                  variant="primary"
+                  size="sm"
+                  fullWidth
+                  iconLeft={LayoutDashboard}
+                  onClick={() => handleNavClick('#/admin/dashboard')}
+                >
+                  Panel Admin
+                </Button>
+              ) : (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  fullWidth
+                  iconLeft={LogIn}
+                  onClick={() => handleNavClick('#/admin/login')}
+                >
+                  Login Admin
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}

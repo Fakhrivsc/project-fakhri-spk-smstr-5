@@ -14,7 +14,9 @@ import {
   TrendingUp,
   BarChart3,
   Search,
-  Sparkles
+  Sparkles,
+  AlertTriangle,
+  Sliders
 } from 'lucide-react';
 import Button from '../../components/ui/Button';
 import { Card, CardHeader, CardBody, CardFooter } from '../../components/ui/Card';
@@ -200,6 +202,50 @@ export default function RecommendationResultPage({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      {/* Alert Error jika Masukan SAW Tidak Valid */}
+      {!sawResult.success && (
+        <Card style={{ marginBottom: '32px', borderColor: 'var(--color-error)' }}>
+          <CardBody style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--color-error)' }}>
+              <AlertTriangle size={24} />
+              <h3 style={{ fontSize: 'var(--font-size-md)', fontWeight: 700 }}>
+                Perhitungan SAW Tidak Dapat Dijalankan (Validasi Parameter Gagal)
+              </h3>
+            </div>
+            <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
+              Sistem mendeteksi bahwa parameter kriteria, bobot, atau matriks keputusan saat ini belum memenuhi kaidah matematis metode SAW:
+            </p>
+            <ul style={{ paddingLeft: '24px', fontSize: 'var(--font-size-sm)', color: 'var(--color-error)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              {sawResult.errors.map((err, idx) => (
+                <li key={idx}>{err}</li>
+              ))}
+            </ul>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '8px', flexWrap: 'wrap' }}>
+              <Button
+                variant="primary"
+                size="sm"
+                iconLeft={Sliders}
+                onClick={() => onNavigate('#/admin/criteria')}
+              >
+                Sesuaikan Bobot & Kriteria
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
+                iconLeft={RotateCcw}
+                onClick={() => {
+                  storageAdapter.resetAllDemoData();
+                  showToast('Dataset DEMO berhasil di-reset ke nilai acuan default!', 'success');
+                  window.location.reload();
+                }}
+              >
+                Reset ke Dataset DEMO Default
+              </Button>
+            </div>
+          </CardBody>
+        </Card>
+      )}
 
       {/* Top Winner Hero Card */}
       {topCut && (

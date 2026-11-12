@@ -56,10 +56,10 @@ function MainAppContent() {
       case '#/admin/dashboard': return 'Dashboard Admin';
       case '#/admin/cuts': return 'Manajemen Bagian Daging Sapi';
       case '#/admin/recipes': return 'Manajemen Jenis Masakan';
-      case '#/admin/criteria': return 'Kriteria & Bobot (Fase D)';
-      case '#/admin/saw': return 'Perhitungan SAW (Fase E)';
+      case '#/admin/criteria': return 'Kriteria & Bobot Penilaian';
+      case '#/admin/saw': return 'Simulasi & Perhitungan SAW';
       case '#/admin/history': return 'Riwayat Perhitungan SAW';
-      case '#/admin/reports': return 'Laporan Rekomendasi (Fase G)';
+      case '#/admin/reports': return 'Laporan Hasil Keputusan';
       case '#/admin/settings': return 'Pengaturan & Dataset';
       default: return 'Admin Panel';
     }
@@ -98,6 +98,18 @@ function MainAppContent() {
 
   // Render Admin subpages
   if (isAdminRoute) {
+    // Client-side authentication barrier
+    if (!auth.isAuthenticated) {
+      return (
+        <PublicLayout currentPath={currentPath} onNavigate={navigate}>
+          <div style={{ textAlign: 'center', paddingTop: '24px' }}>
+            <span className="badge-demo">AUTENTIKASI ADMINISTRATOR DIPERLUKAN</span>
+          </div>
+          <LoginPage onNavigate={navigate} />
+        </PublicLayout>
+      );
+    }
+
     let content = null;
     switch (currentPath) {
       case '#/admin/dashboard':
@@ -152,7 +164,12 @@ function MainAppContent() {
     }
 
     return (
-      <AdminLayout currentPath={currentPath} onNavigate={navigate} title={getAdminTitle()}>
+      <AdminLayout
+        currentPath={currentPath}
+        onNavigate={navigate}
+        onLogout={handleLogout}
+        title={getAdminTitle()}
+      >
         {content}
       </AdminLayout>
     );

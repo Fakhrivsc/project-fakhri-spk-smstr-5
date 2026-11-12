@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 
-export default function AdminLayout({ currentPath, onNavigate, title = 'Admin Panel', children }) {
+export default function AdminLayout({ currentPath, onNavigate, onLogout, title = 'Admin Panel', children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -40,6 +40,15 @@ export default function AdminLayout({ currentPath, onNavigate, title = 'Admin Pa
 
   return (
     <div className="admin-layout">
+      {/* Mobile Backdrop Overlay */}
+      {mobileOpen && (
+        <div
+          className="mobile-overlay"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar */}
       <aside className={`admin-sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-header">
@@ -49,14 +58,26 @@ export default function AdminLayout({ currentPath, onNavigate, title = 'Admin Pa
             </div>
             {!collapsed && <span className="brand-title">BeefChoice Admin</span>}
           </div>
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="btn-ghost"
-            style={{ color: 'var(--color-text-muted)', padding: 6, borderRadius: 6, display: 'flex' }}
-            title={collapsed ? 'Perluas Sidebar' : 'Ciutkan Sidebar'}
-          >
-            {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <button
+              onClick={() => setCollapsed(!collapsed)}
+              className="btn-ghost"
+              style={{ color: 'var(--color-text-muted)', padding: 6, borderRadius: 6, display: 'flex' }}
+              title={collapsed ? 'Perluas Sidebar' : 'Ciutkan Sidebar'}
+            >
+              {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+            </button>
+            {mobileOpen && (
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="btn-ghost"
+                style={{ color: 'var(--color-text-muted)', padding: 6, borderRadius: 6, display: 'flex' }}
+                title="Tutup Menu"
+              >
+                <X size={18} />
+              </button>
+            )}
+          </div>
         </div>
 
         <ul className="sidebar-menu">
@@ -104,8 +125,7 @@ export default function AdminLayout({ currentPath, onNavigate, title = 'Admin Pa
           <div className="topbar-left">
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="btn-ghost"
-              style={{ padding: 6, display: 'none' }} /* shown via css in mobile */
+              className="topbar-mobile-toggle"
               aria-label="Toggle sidebar"
             >
               <Menu size={20} />
@@ -119,7 +139,13 @@ export default function AdminLayout({ currentPath, onNavigate, title = 'Admin Pa
               variant="ghost"
               size="sm"
               iconLeft={LogOut}
-              onClick={() => handleMenuClick('#/')}
+              onClick={() => {
+                if (onLogout) {
+                  onLogout();
+                } else {
+                  handleMenuClick('#/');
+                }
+              }}
             >
               Keluar
             </Button>
